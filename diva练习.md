@@ -1,11 +1,9 @@
 
 
-D:\appsec\platform-tools_r29.0.1-windows\platform-tools>`adb shell ps| findstr di
-va`  
+D:\appsec\platform-tools_r29.0.1-windows\platform-tools>`adb shell ps| findstr diva`  
 u0_a4     10273 77    1541480 43112 ffffffff b7558ce5 S jakhar.aseem.diva  
 
-D:\appsec\platform-tools_r29.0.1-windows\platform-tools>`adb shell logcat | finds
-tr 10273`  
+D:\appsec\platform-tools_r29.0.1-windows\platform-tools>`adb shell logcat | findstr 10273`  
 E/libprocessgroup(10273): failed to make and chown /acct/uid_10004: Read-only fi
 le system  
 I/ActivityManager(  420): Start proc 10273:jakhar.aseem.diva/u0a4 for activity j
