@@ -12,7 +12,7 @@ I/ActivityManager(  420): Start proc 10273:jakhar.aseem.diva/u0a4 for activity j
 akhar.aseem.diva/.MainActivity
 D/OpenGLRenderer(10273): endAllStagingAnimators on 0xb3f53a80 (RippleDrawable) w
 ith handle 0xadc297c0
-E/diva-log(10273): Error while processing transaction with credit card: ** 12312312
+E/diva-log(10273): Error while processing transaction with credit card: **12312312
 31234** 
 V/RenderScript(10273): 0xa14ca400 Launching thread(s), CPUs 2
 ```
