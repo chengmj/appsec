@@ -1,9 +1,10 @@
 
+## 1.Insecure Logging
 
-D:\appsec\platform-tools_r29.0.1-windows\platform-tools>`adb shell ps| findstr diva`  
+D:\appsec\platform-tools_r29.0.1-windows\platform-tools>**`adb shell ps| findstr diva`**  
 u0_a4     10273 77    1541480 43112 ffffffff b7558ce5 S jakhar.aseem.diva  
 
-D:\appsec\platform-tools_r29.0.1-windows\platform-tools>`adb shell logcat | findstr 10273`  
+D:\appsec\platform-tools_r29.0.1-windows\platform-tools>**`adb shell logcat | findstr 10273`**  
 E/libprocessgroup(10273): failed to make and chown /acct/uid_10004: Read-only fi
 le system  
 I/ActivityManager(  420): Start proc 10273:jakhar.aseem.diva/u0a4 for activity j
@@ -14,3 +15,4 @@ E/diva-log(10273): Error while processing transaction with credit card: **123123
 31234**   
 V/RenderScript(10273): 0xa14ca400 Launching thread(s), CPUs 2  
 
+可以看到logcat打印出输入的信用卡信息。
