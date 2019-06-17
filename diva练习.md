@@ -32,5 +32,6 @@ V/RenderScript(10273): 0xa14ca400 Launching thread(s), CPUs 2
         }
     }
  ```
- ![avatar](/2019-06-17_215440.jpg)
+
+![这是一张图片](2019-06-17_215440.jpg)
 
