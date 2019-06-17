@@ -32,5 +32,5 @@ V/RenderScript(10273): 0xa14ca400 Launching thread(s), CPUs 2
         }
     }
  ```
- ![avatar](2019-06-17_2.jpg)
+ ![avatar](../2019-06-17_2.jpg)
 
