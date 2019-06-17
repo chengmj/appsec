@@ -1,5 +1,5 @@
 
-## 1.Insecure Logging
+## 1. Insecure Logging
 
 D:\appsec\platform-tools_r29.0.1-windows\platform-tools>**`adb shell ps| findstr diva`**  
 u0_a4     10273 77    1541480 43112 ffffffff b7558ce5 S jakhar.aseem.diva  
@@ -16,3 +16,21 @@ E/diva-log(10273): Error while processing transaction with credit card: **123123
 V/RenderScript(10273): 0xa14ca400 Launching thread(s), CPUs 2  
 
 可以看到logcat打印出输入的信用卡信息。
+
+## 2. Hardcoding Issues    
+通过查看HardcodeActivity.java文件，可以看到hckey与vendorsecretkey比较，将vendorsecretkey输入即可。
+```
+
+    public void access(View view) {
+        EditText hckey = (EditText) findViewById(R.id.hcKey);
+
+        if (hckey.getText().toString().equals("vendorsecretkey")) {
+            Toast.makeText(this, "Access granted! See you on the other side :)", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, "Access denied! See you in hell :D", Toast.LENGTH_SHORT).show();
+        }
+    }
+ ```
+ 
+    
