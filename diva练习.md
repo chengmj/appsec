@@ -17,6 +17,22 @@ V/RenderScript(10273): 0xa14ca400 Launching thread(s), CPUs 2
 
 可以看到logcat打印出输入的信用卡信息。
 
+### logcat知识点
+
+Android Logcat使用起来可以方便的观察调试内容，基本上的使用方法(巧用Logcat调试程序)。
+
+一、Log.v 的调试颜色为黑色的，任何消息都会输出，这里的v代表verbose啰嗦的意思，平时使用就是Log.v(“”,”“);
+
+二、Log.d的输出颜色是蓝色的，仅输出debug调试的意思，但他会输出上层的信息，过滤起来可以通过DDMS的Logcat标签来选择
+
+三、Log.i的输出为绿色，一般提示性的消息information，它不会输出Log.v和Log.d的信息，但会显示i、w和e的信息
+
+四、Log.w的意思为橙色，可以看作为warning警告，一般需要我们注意优化Android代码，同时选择它后还会输出Log.e的信息。
+
+五、Log.e为红色，可以想到error错误，这里仅显示红色的错误信息，这些错误就需要我们认真的分析，查看栈的信息了。
+
+这些区别就是在DDMS的Logcat显示的颜色的区别
+
 ## 2. Hardcoding Issues    
 通过查看HardcodeActivity.java文件，可以看到hckey与vendorsecretkey比较，将vendorsecretkey输入即可。
 ```
