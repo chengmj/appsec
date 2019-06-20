@@ -1,0 +1,1 @@
+activity是Android组件中最基本也是最为常见用的四大组件之一。Android四大组件有Activity，Service服务，Content Provider内容提供，BroadcastReceiver广播接收器。
