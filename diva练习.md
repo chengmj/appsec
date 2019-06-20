@@ -51,3 +51,23 @@ Android Logcat使用起来可以方便的观察调试内容，基本上的使用
 
 ![这是一张图片](2019-06-17_215440.jpg)
 
+## Insecure Data Storage -Part2
+数据库路径：/data/data/jakhar.aseem.diva/databases
+```
+root@SM-G930F:/data/data/jakhar.aseem.diva/databases # ls
+divanotes.db
+divanotes.db-journal
+ids2
+ids2-journal
+root@SM-G930F:/data/data/jakhar.aseem.diva/databases #
+root@SM-G930F:/data/data/jakhar.aseem.diva/databases # sqlite3 ids2
+SQLite version 3.8.6.1 2015-05-21 17:24:32
+Enter ".help" for usage hints.
+sqlite> show tables;
+Error: near "show": syntax error
+sqlite> .tables
+android_metadata  myuser
+sqlite> select * from myuser;
+test_name|test_password2
+sqlite>
+```
