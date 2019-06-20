@@ -51,7 +51,7 @@ Android Logcat使用起来可以方便的观察调试内容，基本上的使用
 
 ![硬编码](2019-06-17_215440.jpg)
 
-## Insecure Data Storage -Part1
+## 3. Insecure Data Storage -Part1
 不安全的数据存储主要有三种方式：    
 - 将敏感数据保存到配置文件中。
 - 将敏感数据保存在本地的sqlite3数据库中。
@@ -65,7 +65,7 @@ adb下查看该文件可以看到敏感信息，文件路径：
 `/data/data/jakhar.aseem.diva/shared_prefs/jakhar.aseem.diva_preferences.xml`
 ![不安全的数据存储3](diva-images/2019-06-19_194228.jpg)
 
-## 4.Insecure Data Storage -Part2
+## 4. Insecure Data Storage -Part2
 用户的敏感信息存储到本地的数据库中，一般app对应的数据库目录:`/data/data/apppackagename/databases`
 文件路径：`/data/data/jakhar.aseem.diva/databases/ids2`
 ```
@@ -106,7 +106,7 @@ test_name|test_password2
 sqlite>
 ```
 sqlite3命令参考：https://www.runoob.com/sqlite/sqlite-commands.html
-## Insecure Data Storage -Part3
+## 5. Insecure Data Storage -Part3
 这一关是把用户名密码写到一个临时文件中了。
 文件路径：`/data/data/jakhar.aseem.diva/uinfo-1681723197tmp`
 ```
@@ -139,7 +139,7 @@ root@DUK-AL20:/data/data/jakhar.aseem.diva #
             // Now you can read the temporary file where ever the credentials are required.
         }
 ```
-## Insecure Data Storage -Part4
+## 6. Insecure Data Storage -Part4
 这一关将用户名密码存储到sd卡路径下`.uinfo.txt`文件中了。
 代码片段：
 ```
