@@ -71,3 +71,5 @@ sqlite> select * from myuser;
 test_name|test_password2
 sqlite>
 ```
+sqlite3命令参考：https://www.runoob.com/sqlite/sqlite-commands.html
+
