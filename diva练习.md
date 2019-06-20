@@ -51,7 +51,41 @@ Android Logcat使用起来可以方便的观察调试内容，基本上的使用
 
 ![硬编码](2019-06-17_215440.jpg)
 
+## Insecure Data Storage -Part1
+不安全的数据存储主要有三种方式：    
+- 将敏感数据保存到配置文件中。
+- 将敏感数据保存在本地的sqlite3数据库中。
+- 将敏感数据保存在临时文件或者sd卡中。
+
+![不安全的数据存储](diva-images/2019-06-19_193331.jpg)
+源代码：
+![不安全的数据存储2](diva-images/2019-06-19_193727.jpg)
+SharedPreferences类存储的数据会以.xml的形式存储在`/data/data/apppackagename/shared_prefs `
+adb下查看该文件可以看到敏感信息，文件路径：
+`/data/data/jakhar.aseem.diva/shared_prefs/jakhar.aseem.diva_preferences.xml`
+![不安全的数据存储3](diva-images/2019-06-19_194228.jpg)
+
 ## 4.Insecure Data Storage -Part2
+用户的敏感信息存储到本地的数据库中，一般app对应的数据库目录:`/data/data/apppackagename/databases`
+文件路径：`/data/data/jakhar.aseem.diva/databases/ids2`
+```
+protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            mDB = openOrCreateDatabase("ids2", MODE_PRIVATE, null);
+            mDB.execSQL("CREATE TABLE IF NOT EXISTS myuser(user VARCHAR, password VARCHAR);");
+        }
+```
+```
+    public void saveCredentials(View view) {
+        EditText usr = (EditText) findViewById(R.id.ids2Usr);
+        EditText pwd = (EditText) findViewById(R.id.ids2Pwd);
+        try {
+            mDB.execSQL("INSERT INTO myuser VALUES ('"+ usr.getText().toString() +"', '"+ pwd.getText().toString() +"');");
+            mDB.close();
+        }
+```
+
 数据库路径：/data/data/jakhar.aseem.diva/databases
 ```
 root@SM-G930F:/data/data/jakhar.aseem.diva/databases # ls
@@ -72,4 +106,82 @@ test_name|test_password2
 sqlite>
 ```
 sqlite3命令参考：https://www.runoob.com/sqlite/sqlite-commands.html
+## Insecure Data Storage -Part3
+这一关是把用户名密码写到一个临时文件中了。
+文件路径：`/data/data/jakhar.aseem.diva/uinfo-1681723197tmp`
+```
+root@DUK-AL20:/data/data/jakhar.aseem.diva # ls
+cache
+databases
+lib
+shared_prefs
+uinfo-1681723197tmp
+root@DUK-AL20:/data/data/jakhar.aseem.diva # cat uinfo-1681723197tmp
+test3:password3
+root@DUK-AL20:/data/data/jakhar.aseem.diva #
+```
+代码片段：
+```
+ public void saveCredentials(View view) {
+        EditText usr = (EditText) findViewById(R.id.ids3Usr);
+        EditText pwd = (EditText) findViewById(R.id.ids3Pwd);
 
+        File ddir =  new File(getApplicationInfo().dataDir);
+
+        try {
+            File uinfo = File.createTempFile("uinfo", "tmp", ddir);
+            uinfo.setReadable(true);
+            uinfo.setWritable(true);
+            FileWriter fw = new FileWriter(uinfo);
+            fw.write(usr.getText().toString() + ":" + pwd.getText().toString() + "\n");
+            fw.close();
+            Toast.makeText(this, "3rd party credentials saved successfully!", Toast.LENGTH_SHORT).show();
+            // Now you can read the temporary file where ever the credentials are required.
+        }
+```
+## Insecure Data Storage -Part4
+这一关将用户名密码存储到sd卡路径下`.uinfo.txt`文件中了。
+代码片段：
+```
+public void saveCredentials(View view) {
+        EditText usr = (EditText) findViewById(R.id.ids4Usr);
+        EditText pwd = (EditText) findViewById(R.id.ids4Pwd);
+
+        File sdir = Environment.getExternalStorageDirectory();
+
+        try {
+            File uinfo = new File(sdir.getAbsolutePath() + "/.uinfo.txt");
+            uinfo.setReadable(true);
+            uinfo.setWritable(true);
+            FileWriter fw = new FileWriter(uinfo);
+            fw.write(usr.getText().toString() + ":" + pwd.getText().toString() + "\n");
+            fw.close();
+            Toast.makeText(this, "3rd party credentials saved successfully!", Toast.LENGTH_SHORT).show();
+            // Now you can read the temporary file where ever the credentials are required.
+        }
+```
+获取sd卡绝对路径，`File sdir = Environment.getExternalStorageDirectory();`，并存储为隐藏文件`.uinfo.txt`
+```
+130|root@DUK-AL20:/ # cd /mnt/sdcard/
+root@DUK-AL20:/mnt/sdcard # ls -al
+-rw-rw---- root     sdcard_r       16 2019-06-19 20:27 .uinfo.txt
+drwxrwx--- root     sdcard_r          2016-05-31 17:34 0
+drwxrwx--- root     sdcard_r          2019-06-17 21:22 Alarms
+drwxrwx--x root     sdcard_r          2019-01-25 16:42 Android
+drwxrwx--- root     sdcard_r          2019-06-17 21:22 DCIM
+drwxrwxrwx sdcard_rw sdcard_rw          2019-06-19 19:18 Download
+drwxrwxrwx sdcard_rw sdcard_rw          2019-06-17 20:21 Movies
+drwxrwxrwx sdcard_rw sdcard_rw          2019-06-17 20:21 Music
+drwxrwx--- root     sdcard_r          2019-06-17 21:22 Notifications
+drwxrwxrwx sdcard_rw sdcard_rw          2019-06-17 20:21 Pictures
+drwxrwx--- root     sdcard_r          2019-06-17 21:22 Podcasts
+drwxrwx--- root     sdcard_r          2019-06-17 21:22 Ringtones
+drwxrwx--- root     sdcard_r          2016-05-31 17:30 legacy
+drwxrwx--- root     sdcard_r          2019-06-17 21:28 marketSp
+drwxrwx--- root     sdcard_r          2016-05-31 17:30 obb
+drwxrwx--- root     sdcard_r          2019-06-17 21:29 storage
+drwxrwx--- root     sdcard_r          2019-06-17 21:28 xysdk
+root@DUK-AL20:/mnt/sdcard # cat .uinfo.txt
+test4:password4
+root@DUK-AL20:/mnt/sdcard #
+```
