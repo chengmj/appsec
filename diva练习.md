@@ -49,9 +49,9 @@ Android Logcat使用起来可以方便的观察调试内容，基本上的使用
     }
  ```
 
-![这是一张图片](2019-06-17_215440.jpg)
+![硬编码](2019-06-17_215440.jpg)
 
-## Insecure Data Storage -Part2
+## 4.Insecure Data Storage -Part2
 数据库路径：/data/data/jakhar.aseem.diva/databases
 ```
 root@SM-G930F:/data/data/jakhar.aseem.diva/databases # ls
