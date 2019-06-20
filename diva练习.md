@@ -59,10 +59,14 @@ Android Logcat使用起来可以方便的观察调试内容，基本上的使用
 
 ![不安全的数据存储](diva-images/2019-06-19_193331.jpg)
 源代码：
+
 ![不安全的数据存储2](diva-images/2019-06-19_193727.jpg)
 SharedPreferences类存储的数据会以.xml的形式存储在`/data/data/apppackagename/shared_prefs `
+
 adb下查看该文件可以看到敏感信息，文件路径：
+
 `/data/data/jakhar.aseem.diva/shared_prefs/jakhar.aseem.diva_preferences.xml`
+
 ![不安全的数据存储3](diva-images/2019-06-19_194228.jpg)
 
 ## 4. Insecure Data Storage -Part2
