@@ -341,7 +341,7 @@ root@DUK-AL20:/ #
 ```
 这里使用了ContentProvider，android:enabled表示是否能由系统初始化，android:exported表示是否能被其他应用使用，android:authorities：标识这个ContentProvider，调用者可以根据这个标识来找到它，具体内容可以查阅其他资料。
 
-==看到2个值都为true，我们就可以使用content://访问里面的数据了==，搜索包含==content://==的字符串文件：    
+**看到2个值都为true，我们就可以使用content://访问里面的数据了** ，搜索包含**content://** 的字符串文件：    
 ![访问控制3](diva-images/2019-06-21_150551.jpg)
 
 smali/jakhar/aseem/diva/NotesProvider.smali
