@@ -82,5 +82,9 @@ Manifest文件中使用`<activity>`标签声明Activity类。
 在Manifest文件中，其他应用程序使用`use-permission`权限标签，请求对应权限功能的访问。Activity可以使用`<activity>`标签的`ndroid:permission`属性设置Activity的权限，限制其他应用对该Activity的启动。
 当其他app调用`Context.startActivity`()或`Activity.startActivityForResult()`启动该Activity时，系统会查看其权限，若调用者不具有该权限，启动Activity的请求会被拒绝。
 
-
+#### Intent
+Intent用于激活其他应用程序组件（如Activity、Service和Broadcast Receiver）的消息体。描述了需要执行的动作或操作。
+借助Intent，Android提供了一种在运行之后的应用程序组件之间的绑定机制，这种机制既可以在同一个app的组件之间运行，也可以在不同的app组件之间运行。
+例如：
+阅读一篇文章，想将文章分享给别人，就会发生在A应用调用B应用Activity的活动。
   
