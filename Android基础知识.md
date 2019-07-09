@@ -24,11 +24,11 @@ Android系统是基于Linux内核的，这一层为Android设备的各种硬件�
 
 
 
-- **活动管理器:**管理各个应用程序的生命周期以及通常的导航回退功能。作用：负责一新ActivityThread进程创建，Activity生命周期的维护。其自身也存在一个框架，本文就不再讨论，有兴趣的可以看一看。
+- **活动管理器:** 管理各个应用程序的生命周期以及通常的导航回退功能。作用：负责一新ActivityThread进程创建，Activity生命周期的维护。其自身也存在一个框架，本文就不再讨论，有兴趣的可以看一看。
 
 
 
--  **窗口管理器：**管理所有的窗口程序，在安卓应用框架中窗口主要分为两种:
+-  **窗口管理器:** 管理所有的窗口程序，在安卓应用框架中窗口主要分为两种:
 
 （一）是应用窗口（一个activity有一个主窗口，弹出的对话框也有一个窗口，Menu菜单也是一个窗口。在同一个activity中，主窗口、对话框、Menu窗口之间通过该activity关联起来）。
 
@@ -40,31 +40,47 @@ Android系统是基于Linux内核的，这一层为Android设备的各种硬件�
 
 
 
- **视图系统:**构建应用程序的基本组就是文本框、按钮等。
+ **视图系统:** 构建应用程序的基本组就是文本框、按钮等。
 
 
 
- **通告管理器:**使得应用程序可以在状态栏显示自定义的提示信息，通过NotificationManager 、 Notification这两个类可以完成在状态栏显示提示的信息。
+ **通告管理器:** 使得应用程序可以在状态栏显示自定义的提示信息，通过NotificationManager 、 Notification这两个类可以完成在状态栏显示提示的信息。
 
 
 
-**包管理器：**安卓系统内的程序管理，Package Manger是一个实际上管理应用程序安装、卸载和升级的API。当我们安装APK文件时，Package Manager会解析APK包文件和显示确认信息。
+**包管理器:** 安卓系统内的程序管理，Package Manger是一个实际上管理应用程序安装、卸载和升级的API。当我们安装APK文件时，Package Manager会解析APK包文件和显示确认信息。
 
 ​     
 
-**电话管理器:**管理所有的移动设备 用于管理手机通话状态、获取电话信息（设备、sim卡、网络信息），监听电话状态以及调用电话拨号器拨打电话。
+**电话管理器:** 管理所有的移动设备 用于管理手机通话状态、获取电话信息（设备、sim卡、网络信息），监听电话状态以及调用电话拨号器拨打电话。
 
 
 
-**资源管理器:**提供应用程序使用的各种非代码资源。提供应用程序使用的各种非代码资源，如本地化字符串、图片、布局文件、颜色文件等
+**资源管理器:** 提供应用程序使用的各种非代码资源。提供应用程序使用的各种非代码资源，如本地化字符串、图片、布局文件、颜色文件等
 
 ​        
 
-**位置管理器:**提供位置服务，LocationManager系统服务是位置服务的核心组件，它提供了一系列方法来处理与位置相关的问题，包括查询上一个已知位置、注册和注销来自某个。LocationProvider的周期性的位置更新、注册和注销接近某个坐标时对一个已定义的Intent的触发等。总的来说就是提供有关位置的操作。
+**位置管理器:** 提供位置服务，LocationManager系统服务是位置服务的核心组件，它提供了一系列方法来处理与位置相关的问题，包括查询上一个已知位置、注册和注销来自某个。LocationProvider的周期性的位置更新、注册和注销接近某个坐标时对一个已定义的Intent的触发等。总的来说就是提供有关位置的操作。
 
 ​     
 
 **XMPP服务:例如**提供Google Talk 服务，XMPP（Extensible Messageing and Presence Protocol：可扩展消息与存在协议）：是一种即时消息协议用于信息的传输。是一种基于XML的开放式实时通信协议，XMPP是基于服务器的也是分散式的
+
+### 应用程序组件
+Android应用程序由多个组件构成，其中主要的4种组件有：Activity、Broadcast Receiver、Content Provider和Service。
+#### Activity
+Android应用程序的可视用户接口，即用户看到的与之进行可视交互的屏幕显示界面。
+大多数app都会包含多个Activity，每一个Activity对应一个用户能够看到的或与之交互的屏幕显示界面，在这些Activity之间，用户可以随意的切换。
+用户能够以任何顺序（除少量例外）启动app中不同的Activity。还可以使用Intent启动其他app的Activity。
+app启动时，会有一个main Activity被启动，作为UI显示在屏幕上。
+开发者使用setContentView函数创建UI组件，也就是显示屏幕显示界面的布局。
+
+**所有的Activity都需要在Manifest文件内声明。** 否则不能在系统中注册，未声明的Activity也就无法被启动。
+Manifest文件中使用`<activity>`标签声明Activity类。
+
+**Android应用程序可以启动其他应用程序的Activity**，因此需要对这种特定的能力进行限制。
+在Manifest文件中，其他应用程序使用`use-permission`权限标签，请求对应权限功能的访问。Activity可以使用`<activity>`标签的`ndroid:permission`属性设置Activity的权限，限制其他应用对该Activity的启动。
+当其他app调用`Context.startActivity`()或`Activity.startActivityForResult()`启动该Activity时，系统会查看其权限，若调用者不具有该权限，启动Activity的请求会被拒绝。
 
 
   
