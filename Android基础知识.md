@@ -88,3 +88,13 @@ Intent用于激活其他应用程序组件（如Activity、Service和Broadcast R
 例如：
 阅读一篇文章，想将文章分享给别人，就会发生在A应用调用B应用Activity的活动。
   
+### 系统中的权限查看
+在设备上，没有用于应用程序的Manifest XML文件，Manifest XML文件只用在开发人员编写创建apk文件时，对于已经安装在系统上的应用程序来说，如果想要查看程序的权限，只能通过查阅设备系统上/data/system目录下的packages.xml文件。
+
+需要系统执行权限验证的情景有：
+- 应用程序执行时。
+- 应用程序执行没有授权的功能时。
+- 应用程序启动没有授权的Activity时。
+- 应用程序发送或接收广播Intent时。
+- 访问或更新Content Provider时。
+- 应用程序创建服务时。
