@@ -1,4 +1,5 @@
 # Android基础知识
+学习链接：https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05a-Platform-Overview.md
 
 ## Android体系结构
 
