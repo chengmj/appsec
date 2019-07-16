@@ -57,7 +57,6 @@ adb -s 10.129.164.6:5555 install test.apk
 ```
 
 
-
 ### apktool
 #### 解包：  
 ```
@@ -103,7 +102,8 @@ I: Built apk...
 D:\tools>
 ```
 ### apk签名
-keytool -genkey -alias ztetest.keystore -keyalg RSA -validity 2000 -keystore newdiva.keystore
+`keytool -genkey -alias ztetest.keystore -keyalg RSA -validity 2000 -keystore newdiva.keystore`
+
 #### 签名文件的生成：
 ```
 D:\appsec\platform-tools_r29.0.1-windows\platform-tools>D:\tools\jdk-11.0.2_wind
@@ -128,8 +128,11 @@ CN=cmj, OU=zte, O=zte, L=nj, ST=js, C=cn是否正确?
 ```
 #### 签名：
 使用jarsigner进行签名
-jarsigner -verbose -keystore [您的私钥存放路径] -signedjar [签名后文件存放路径] [未签名的文件路径] [您的证书名称]
+
+`jarsigner -verbose -keystore [您的私钥存放路径] -signedjar [签名后文件存放路径] [未签名的文件路径] [您的证书名称]`
+
 [您的证书名称] 即keytool生成签名文件时的别名参数，即-alias 后面的参数。   
+
 ```
 D:\tools>D:\tools\jdk-11.0.2_windows-x64_bin\jdk-11.0.2\bin\jarsigner.exe -verbo
 se -keystore D:\appsec\platform-tools_r29.0.1-windows\platform-tools\newdiva.key
