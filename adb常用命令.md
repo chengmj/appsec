@@ -101,10 +101,11 @@ I: Built apk...
 
 D:\tools>
 ```
-### apk签名
+### apk签名 
+#### 签名文件的生成：
 `keytool -genkey -alias ztetest.keystore -keyalg RSA -validity 2000 -keystore newdiva.keystore`
 
-#### 签名文件的生成：
+
 ```
 D:\appsec\platform-tools_r29.0.1-windows\platform-tools>D:\tools\jdk-11.0.2_wind
 ows-x64_bin\jdk-11.0.2\bin\keytool.exe -genkey -alias ztetest.keystore -keyalg R
@@ -112,21 +113,21 @@ SA -validity 2000 -keystore newdiva.keystore
 输入密钥库口令:
 再次输入新口令:
 您的名字与姓氏是什么?
-  [Unknown]:  cmj
+  [Unknown]:  name
 您的组织单位名称是什么?
-  [Unknown]:  zte
+  [Unknown]:  org
 您的组织名称是什么?
-  [Unknown]:  zte
+  [Unknown]:  z_org
 您所在的城市或区域名称是什么?
-  [Unknown]:  nj
+  [Unknown]:  NewY
 您所在的省/市/自治区名称是什么?
-  [Unknown]:  js
+  [Unknown]:  U
 该单位的双字母国家/地区代码是什么?
   [Unknown]:  cn
-CN=cmj, OU=zte, O=zte, L=nj, ST=js, C=cn是否正确?
+CN=name, OU=or, O=z_org, L=NewY, ST=U, C=cn是否正确?
   [否]:  是
 ```
-#### 签名：
+#### 签名V1：
 使用jarsigner进行签名
 
 `jarsigner -verbose -keystore [您的私钥存放路径] -signedjar [签名后文件存放路径] [未签名的文件路径] [您的证书名称]`
