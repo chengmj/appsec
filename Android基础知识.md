@@ -2,7 +2,7 @@
 
 ## Android体系结构
 
-### ![timg](android-images\timg.jpg)
+### ![timg](android-images/timg.jpg)
 
 ### Linux内核层
 
