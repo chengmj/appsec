@@ -99,3 +99,11 @@ Intent用于激活其他应用程序组件（如Activity、Service和Broadcast R
 - 应用程序发送或接收广播Intent时。
 - 访问或更新Content Provider时。
 - 应用程序创建服务时。
+
+### android:exported
+Whether or not components of other applications can invoke the service or interact with it — "true" if they can, and "false" if not. When the value is "false", only components of the same application or applications with the same user ID can start the service or bind to it.    
+The default value depends on whether the service contains intent filters. The absence of any filters means that it can be invoked only by specifying its exact class name. This implies that the service is intended only for application-internal use (since others would not know the class name). So in this case, the default value is "false". On the other hand, the presence of at least one filter implies that the service is intended for external use, so the default value is "true".    
+
+This attribute is not the only way to limit the exposure of a service to other applications. You can also use a permission to limit the external entities that can interact with the service (see the permission attribute).    
+参考链接：https://developer.android.com/guide/topics/manifest/service-element#exported
+
